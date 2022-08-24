@@ -1,0 +1,653 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Untitled</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="SynEdit HTML exporter" />
+<style type="text/css">
+<!--
+body { color: #000000; background-color: #FFFFFF; }
+.java1-comment { color: #000080; font-style: italic; }
+.java1-documentation { color: #000080; font-style: italic; }
+.java1-identifier { color: #000000; }
+.java1-invalidsymbol { color: #000000; }
+.java1-number { color: #0000FF; }
+.java1-reservedword { color: #000000; font-weight: bold; }
+.java1-space { color: #000000; }
+.java1-string { color: #0000FF; }
+.java1-symbol { color: #000000; }
+-->
+</style>
+</head>
+<body>
+<pre>
+<code><span style="font: 10pt Courier New;"><span class="java1-reservedword">import</span><span class="java1-space"> java.awt.*;
+</span><span class="java1-reservedword">import</span><span class="java1-space"> java.awt.event.*;
+</span><span class="java1-reservedword">import</span><span class="java1-space"> javax.swing.*;
+</span><span class="java1-reservedword">import</span><span class="java1-space"> javax.swing.event.*;
+</span><span class="java1-reservedword">import</span><span class="java1-space"> java.util.*;
+</span><span class="java1-reservedword">import</span><span class="java1-space"> java.util.Hashtable;
+</span><span class="java1-reservedword">import</span><span class="java1-space"> java.awt.font.TextAttribute;
+</span><span class="java1-reservedword">import</span><span class="java1-space"> javax.swing.JFrame;
+
+
+</span><span class="java1-documentation">/**
+ *
+ * Beschreibung
+ *
+ * @version 1.0 vom 17.01.2020
+ * @author 
+ */
+
+</span><span class="java1-reservedword">public</span><span class="java1-space"> </span><span class="java1-reservedword">class</span><span class="java1-space"> Mastermind </span><span class="java1-reservedword">extends</span><span class="java1-space"> JFrame {
+  </span><span class="java1-comment">// Anfang Attribute
+</span><span class="java1-space">  </span><span class="java1-reservedword">private</span><span class="java1-space"> JLabel lMastermind = </span><span class="java1-reservedword">new</span><span class="java1-space"> JLabel();
+  </span><span class="java1-reservedword">private</span><span class="java1-space"> JButton bStart = </span><span class="java1-reservedword">new</span><span class="java1-space"> JButton();
+  </span><span class="java1-reservedword">private</span><span class="java1-space"> JLabel lBitteklickensievierderfolgendenFarbenan = </span><span class="java1-reservedword">new</span><span class="java1-space"> JLabel();
+  </span><span class="java1-reservedword">private</span><span class="java1-space"> JButton bSchwarz = </span><span class="java1-reservedword">new</span><span class="java1-space"> JButton();
+  </span><span class="java1-reservedword">private</span><span class="java1-space"> JButton bWeiss = </span><span class="java1-reservedword">new</span><span class="java1-space"> JButton();
+  </span><span class="java1-reservedword">private</span><span class="java1-space"> JButton bRot = </span><span class="java1-reservedword">new</span><span class="java1-space"> JButton();
+  </span><span class="java1-reservedword">private</span><span class="java1-space"> JButton bBlau = </span><span class="java1-reservedword">new</span><span class="java1-space"> JButton();
+  </span><span class="java1-reservedword">private</span><span class="java1-space"> JButton bGelb = </span><span class="java1-reservedword">new</span><span class="java1-space"> JButton();
+  </span><span class="java1-reservedword">private</span><span class="java1-space"> JButton bGruen = </span><span class="java1-reservedword">new</span><span class="java1-space"> JButton();
+  </span><span class="java1-reservedword">private</span><span class="java1-space"> JButton bWeiter = </span><span class="java1-reservedword">new</span><span class="java1-space"> JButton();
+  </span><span class="java1-reservedword">private</span><span class="java1-space"> JLabel lAuswertung1 = </span><span class="java1-reservedword">new</span><span class="java1-space"> JLabel();
+  </span><span class="java1-reservedword">private</span><span class="java1-space"> JLabel lSiehabenfolgendeFarbenausgewaehlt = </span><span class="java1-reservedword">new</span><span class="java1-space"> JLabel();
+  </span><span class="java1-reservedword">private</span><span class="java1-space"> JLabel lEswurdenfolgendeFarbengezogen = </span><span class="java1-reservedword">new</span><span class="java1-space"> JLabel();
+  </span><span class="java1-reservedword">private</span><span class="java1-space"> JLabel lSchwarz = </span><span class="java1-reservedword">new</span><span class="java1-space"> JLabel();
+  </span><span class="java1-reservedword">private</span><span class="java1-space"> JLabel lWeiss = </span><span class="java1-reservedword">new</span><span class="java1-space"> JLabel();
+  </span><span class="java1-reservedword">private</span><span class="java1-space"> JLabel lRot = </span><span class="java1-reservedword">new</span><span class="java1-space"> JLabel();
+  </span><span class="java1-reservedword">private</span><span class="java1-space"> JLabel lBlau = </span><span class="java1-reservedword">new</span><span class="java1-space"> JLabel();
+  </span><span class="java1-reservedword">private</span><span class="java1-space"> JLabel lGelb = </span><span class="java1-reservedword">new</span><span class="java1-space"> JLabel();
+  </span><span class="java1-reservedword">private</span><span class="java1-space"> JLabel lGruen = </span><span class="java1-reservedword">new</span><span class="java1-space"> JLabel();
+  </span><span class="java1-reservedword">private</span><span class="java1-space"> JButton bWeiter1 = </span><span class="java1-reservedword">new</span><span class="java1-space"> JButton();
+  </span><span class="java1-reservedword">private</span><span class="java1-space"> JLabel lPunktezahl = </span><span class="java1-reservedword">new</span><span class="java1-space"> JLabel();
+  </span><span class="java1-reservedword">private</span><span class="java1-space"> JLabel lDasSpielistvorbei1 = </span><span class="java1-reservedword">new</span><span class="java1-space"> JLabel();
+  </span><span class="java1-reservedword">private</span><span class="java1-space"> JLabel lSiehaben = </span><span class="java1-reservedword">new</span><span class="java1-space"> JLabel();
+  </span><span class="java1-reservedword">private</span><span class="java1-space"> JLabel lDiesesSpielwurdevonLucaBaeckprogrammiert = </span><span class="java1-reservedword">new</span><span class="java1-space"> JLabel();
+  </span><span class="java1-reservedword">private</span><span class="java1-space"> JButton bHier = </span><span class="java1-reservedword">new</span><span class="java1-space"> JButton();
+  </span><span class="java1-reservedword">private</span><span class="java1-space"> JLabel lUmdasSpielzubeendenklickensie = </span><span class="java1-reservedword">new</span><span class="java1-space"> JLabel();
+  </span><span class="java1-reservedword">private</span><span class="java1-space"> JLabel lInstaluca = </span><span class="java1-reservedword">new</span><span class="java1-space"> JLabel();
+  </span><span class="java1-comment">// Ende Attribute
+</span><span class="java1-space">  </span><span class="java1-reservedword">int</span><span class="java1-space"> Punktezahl=</span><span class="java1-number">0</span><span class="java1-symbol">;
+  
+  </span><span class="java1-reservedword">public</span><span class="java1-space"> Mastermind() { 
+    </span><span class="java1-comment">// Frame-Initialisierung
+</span><span class="java1-space">    </span><span class="java1-reservedword">super</span><span class="java1-symbol">();
+    setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+    </span><span class="java1-reservedword">int</span><span class="java1-space"> frameWidth = </span><span class="java1-number">1000</span><span class="java1-symbol">; 
+    </span><span class="java1-reservedword">int</span><span class="java1-space"> frameHeight = </span><span class="java1-number">650</span><span class="java1-symbol">;
+    setSize(frameWidth, frameHeight);
+    Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
+    </span><span class="java1-reservedword">int</span><span class="java1-space"> x = (d.width - getSize().width) / </span><span class="java1-number">2</span><span class="java1-symbol">;
+    </span><span class="java1-reservedword">int</span><span class="java1-space"> y = (d.height - getSize().height) / </span><span class="java1-number">2</span><span class="java1-symbol">;
+    setLocation(x, y);
+    setTitle(</span><span class="java1-string">&quot;Mastermind&quot;</span><span class="java1-symbol">);
+    setResizable(</span><span class="java1-reservedword">false</span><span class="java1-symbol">);
+    Container cp = getContentPane();
+    cp.setLayout(</span><span class="java1-reservedword">null</span><span class="java1-symbol">);
+    </span><span class="java1-comment">// Anfang Komponenten
+</span><span class="java1-space">    
+    cp.setBackground(</span><span class="java1-reservedword">new</span><span class="java1-space"> Color(</span><span class="java1-number">0xFFAFAF</span><span class="java1-symbol">));
+    lMastermind.setBounds(</span><span class="java1-number">216</span><span class="java1-symbol">, </span><span class="java1-number">10</span><span class="java1-symbol">, </span><span class="java1-number">568</span><span class="java1-symbol">, </span><span class="java1-number">100</span><span class="java1-symbol">);
+    lMastermind.setText(</span><span class="java1-string">&quot;Mastermind&quot;</span><span class="java1-symbol">);
+    lMastermind.setBackground(Color.GREEN);
+    lMastermind.setOpaque(</span><span class="java1-reservedword">true</span><span class="java1-symbol">);
+    lMastermind.setForeground(Color.YELLOW);
+    lMastermind.setHorizontalAlignment(SwingConstants.CENTER);
+    lMastermind.setFont(</span><span class="java1-reservedword">new</span><span class="java1-space"> Font(</span><span class="java1-string">&quot;@Malgun Gothic&quot;</span><span class="java1-symbol">, Font.BOLD, </span><span class="java1-number">72</span><span class="java1-symbol">));
+    cp.add(lMastermind);
+    bStart.setBounds(</span><span class="java1-number">425</span><span class="java1-symbol">, </span><span class="java1-number">260</span><span class="java1-symbol">, </span><span class="java1-number">150</span><span class="java1-symbol">, </span><span class="java1-number">50</span><span class="java1-symbol">);
+    bStart.setText(</span><span class="java1-string">&quot;Start&quot;</span><span class="java1-symbol">);
+    bStart.setMargin(</span><span class="java1-reservedword">new</span><span class="java1-space"> Insets(</span><span class="java1-number">2</span><span class="java1-symbol">, </span><span class="java1-number">2</span><span class="java1-symbol">, </span><span class="java1-number">2</span><span class="java1-symbol">, </span><span class="java1-number">2</span><span class="java1-symbol">));
+    bStart.addActionListener(</span><span class="java1-reservedword">new</span><span class="java1-space"> ActionListener() { 
+      </span><span class="java1-reservedword">public</span><span class="java1-space"> </span><span class="java1-reservedword">void</span><span class="java1-space"> actionPerformed(ActionEvent evt) { 
+        bStart_ActionPerformed(evt);
+      }
+    });
+    bStart.setBackground(Color.RED);
+    bStart.setFont(</span><span class="java1-reservedword">new</span><span class="java1-space"> Font(</span><span class="java1-string">&quot;@Malgun Gothic&quot;</span><span class="java1-symbol">, Font.BOLD, </span><span class="java1-number">48</span><span class="java1-symbol">));
+    bStart.setForeground(Color.BLUE);
+    cp.add(bStart);
+    lBitteklickensievierderfolgendenFarbenan.setBounds(</span><span class="java1-number">0</span><span class="java1-symbol">, </span><span class="java1-number">25</span><span class="java1-symbol">, </span><span class="java1-number">1000</span><span class="java1-symbol">, </span><span class="java1-number">70</span><span class="java1-symbol">);
+    lBitteklickensievierderfolgendenFarbenan.setText(</span><span class="java1-string">&quot;Bitte klicken sie vier der folgenden Farben an:&quot;</span><span class="java1-symbol">);
+    lBitteklickensievierderfolgendenFarbenan.setBackground(Color.MAGENTA);
+    lBitteklickensievierderfolgendenFarbenan.setOpaque(</span><span class="java1-reservedword">true</span><span class="java1-symbol">);
+    lBitteklickensievierderfolgendenFarbenan.setForeground(</span><span class="java1-reservedword">new</span><span class="java1-space"> Color(</span><span class="java1-number">0x008000</span><span class="java1-symbol">));
+    lBitteklickensievierderfolgendenFarbenan.setHorizontalAlignment(SwingConstants.CENTER);
+    lBitteklickensievierderfolgendenFarbenan.setHorizontalTextPosition(SwingConstants.LEFT);
+    lBitteklickensievierderfolgendenFarbenan.setFont(</span><span class="java1-reservedword">new</span><span class="java1-space"> Font(</span><span class="java1-string">&quot;@Malgun Gothic&quot;</span><span class="java1-symbol">, Font.BOLD, </span><span class="java1-number">36</span><span class="java1-symbol">));
+    lBitteklickensievierderfolgendenFarbenan.setVisible(</span><span class="java1-reservedword">false</span><span class="java1-symbol">);
+    cp.add(lBitteklickensievierderfolgendenFarbenan);
+    bSchwarz.setBounds(</span><span class="java1-number">75</span><span class="java1-symbol">, </span><span class="java1-number">200</span><span class="java1-symbol">, </span><span class="java1-number">100</span><span class="java1-symbol">, </span><span class="java1-number">60</span><span class="java1-symbol">);
+    bSchwarz.setText(</span><span class="java1-string">&quot;Schwarz&quot;</span><span class="java1-symbol">);
+    bSchwarz.setMargin(</span><span class="java1-reservedword">new</span><span class="java1-space"> Insets(</span><span class="java1-number">2</span><span class="java1-symbol">, </span><span class="java1-number">2</span><span class="java1-symbol">, </span><span class="java1-number">2</span><span class="java1-symbol">, </span><span class="java1-number">2</span><span class="java1-symbol">));
+    bSchwarz.addActionListener(</span><span class="java1-reservedword">new</span><span class="java1-space"> ActionListener() { 
+      </span><span class="java1-reservedword">public</span><span class="java1-space"> </span><span class="java1-reservedword">void</span><span class="java1-space"> actionPerformed(ActionEvent evt) { 
+        bSchwarz_ActionPerformed(evt);
+      }
+    });
+    bSchwarz.setBackground(Color.BLACK);
+    bSchwarz.setFont(</span><span class="java1-reservedword">new</span><span class="java1-space"> Font(</span><span class="java1-string">&quot;@Malgun Gothic&quot;</span><span class="java1-symbol">, Font.BOLD, </span><span class="java1-number">12</span><span class="java1-symbol">));
+    bSchwarz.setForeground(Color.WHITE);
+    bSchwarz.setVisible(</span><span class="java1-reservedword">false</span><span class="java1-symbol">);
+    cp.add(bSchwarz);
+    bWeiss.setBounds(</span><span class="java1-number">225</span><span class="java1-symbol">, </span><span class="java1-number">200</span><span class="java1-symbol">, </span><span class="java1-number">100</span><span class="java1-symbol">, </span><span class="java1-number">60</span><span class="java1-symbol">);
+    bWeiss.setText(</span><span class="java1-string">&quot;Weiß&quot;</span><span class="java1-symbol">);
+    bWeiss.setMargin(</span><span class="java1-reservedword">new</span><span class="java1-space"> Insets(</span><span class="java1-number">2</span><span class="java1-symbol">, </span><span class="java1-number">2</span><span class="java1-symbol">, </span><span class="java1-number">2</span><span class="java1-symbol">, </span><span class="java1-number">2</span><span class="java1-symbol">));
+    bWeiss.addActionListener(</span><span class="java1-reservedword">new</span><span class="java1-space"> ActionListener() { 
+      </span><span class="java1-reservedword">public</span><span class="java1-space"> </span><span class="java1-reservedword">void</span><span class="java1-space"> actionPerformed(ActionEvent evt) { 
+        bWeiss_ActionPerformed(evt);
+      }
+    });
+    bWeiss.setBackground(Color.WHITE);
+    bWeiss.setFont(</span><span class="java1-reservedword">new</span><span class="java1-space"> Font(</span><span class="java1-string">&quot;@Malgun Gothic&quot;</span><span class="java1-symbol">, Font.BOLD, </span><span class="java1-number">12</span><span class="java1-symbol">));
+    bWeiss.setForeground(Color.BLACK);
+    bWeiss.setVisible(</span><span class="java1-reservedword">false</span><span class="java1-symbol">);
+    cp.add(bWeiss);
+    bRot.setBounds(</span><span class="java1-number">375</span><span class="java1-symbol">, </span><span class="java1-number">200</span><span class="java1-symbol">, </span><span class="java1-number">100</span><span class="java1-symbol">, </span><span class="java1-number">60</span><span class="java1-symbol">);
+    bRot.setText(</span><span class="java1-string">&quot;Rot&quot;</span><span class="java1-symbol">);
+    bRot.setMargin(</span><span class="java1-reservedword">new</span><span class="java1-space"> Insets(</span><span class="java1-number">2</span><span class="java1-symbol">, </span><span class="java1-number">2</span><span class="java1-symbol">, </span><span class="java1-number">2</span><span class="java1-symbol">, </span><span class="java1-number">2</span><span class="java1-symbol">));
+    bRot.addActionListener(</span><span class="java1-reservedword">new</span><span class="java1-space"> ActionListener() { 
+      </span><span class="java1-reservedword">public</span><span class="java1-space"> </span><span class="java1-reservedword">void</span><span class="java1-space"> actionPerformed(ActionEvent evt) { 
+        bRot_ActionPerformed(evt);
+      }
+    });
+    bRot.setBackground(Color.RED);
+    bRot.setFont(</span><span class="java1-reservedword">new</span><span class="java1-space"> Font(</span><span class="java1-string">&quot;@Malgun Gothic&quot;</span><span class="java1-symbol">, Font.BOLD, </span><span class="java1-number">12</span><span class="java1-symbol">));
+    bRot.setForeground(Color.BLUE);
+    bRot.setVisible(</span><span class="java1-reservedword">false</span><span class="java1-symbol">);
+    cp.add(bRot);
+    bBlau.setBounds(</span><span class="java1-number">525</span><span class="java1-symbol">, </span><span class="java1-number">200</span><span class="java1-symbol">, </span><span class="java1-number">100</span><span class="java1-symbol">, </span><span class="java1-number">60</span><span class="java1-symbol">);
+    bBlau.setText(</span><span class="java1-string">&quot;Blau&quot;</span><span class="java1-symbol">);
+    bBlau.setMargin(</span><span class="java1-reservedword">new</span><span class="java1-space"> Insets(</span><span class="java1-number">2</span><span class="java1-symbol">, </span><span class="java1-number">2</span><span class="java1-symbol">, </span><span class="java1-number">2</span><span class="java1-symbol">, </span><span class="java1-number">2</span><span class="java1-symbol">));
+    bBlau.addActionListener(</span><span class="java1-reservedword">new</span><span class="java1-space"> ActionListener() { 
+      </span><span class="java1-reservedword">public</span><span class="java1-space"> </span><span class="java1-reservedword">void</span><span class="java1-space"> actionPerformed(ActionEvent evt) { 
+        bBlau_ActionPerformed(evt);
+      }
+    });
+    bBlau.setBackground(Color.BLUE);
+    bBlau.setFont(</span><span class="java1-reservedword">new</span><span class="java1-space"> Font(</span><span class="java1-string">&quot;@Malgun Gothic&quot;</span><span class="java1-symbol">, Font.BOLD, </span><span class="java1-number">12</span><span class="java1-symbol">));
+    bBlau.setForeground(Color.RED);
+    bBlau.setVisible(</span><span class="java1-reservedword">false</span><span class="java1-symbol">);
+    cp.add(bBlau);
+    bGelb.setBounds(</span><span class="java1-number">675</span><span class="java1-symbol">, </span><span class="java1-number">200</span><span class="java1-symbol">, </span><span class="java1-number">100</span><span class="java1-symbol">, </span><span class="java1-number">60</span><span class="java1-symbol">);
+    bGelb.setText(</span><span class="java1-string">&quot;Gelb&quot;</span><span class="java1-symbol">);
+    bGelb.setMargin(</span><span class="java1-reservedword">new</span><span class="java1-space"> Insets(</span><span class="java1-number">2</span><span class="java1-symbol">, </span><span class="java1-number">2</span><span class="java1-symbol">, </span><span class="java1-number">2</span><span class="java1-symbol">, </span><span class="java1-number">2</span><span class="java1-symbol">));
+    bGelb.addActionListener(</span><span class="java1-reservedword">new</span><span class="java1-space"> ActionListener() { 
+      </span><span class="java1-reservedword">public</span><span class="java1-space"> </span><span class="java1-reservedword">void</span><span class="java1-space"> actionPerformed(ActionEvent evt) { 
+        bGelb_ActionPerformed(evt);
+      }
+    });
+    bGelb.setBackground(Color.YELLOW);
+    bGelb.setFont(</span><span class="java1-reservedword">new</span><span class="java1-space"> Font(</span><span class="java1-string">&quot;@Malgun Gothic&quot;</span><span class="java1-symbol">, Font.BOLD, </span><span class="java1-number">12</span><span class="java1-symbol">));
+    bGelb.setForeground(</span><span class="java1-reservedword">new</span><span class="java1-space"> Color(</span><span class="java1-number">0x008000</span><span class="java1-symbol">));
+    bGelb.setVisible(</span><span class="java1-reservedword">false</span><span class="java1-symbol">);
+    cp.add(bGelb);
+    bGruen.setBounds(</span><span class="java1-number">825</span><span class="java1-symbol">, </span><span class="java1-number">200</span><span class="java1-symbol">, </span><span class="java1-number">100</span><span class="java1-symbol">, </span><span class="java1-number">60</span><span class="java1-symbol">);
+    bGruen.setText(</span><span class="java1-string">&quot;Grün&quot;</span><span class="java1-symbol">);
+    bGruen.setMargin(</span><span class="java1-reservedword">new</span><span class="java1-space"> Insets(</span><span class="java1-number">2</span><span class="java1-symbol">, </span><span class="java1-number">2</span><span class="java1-symbol">, </span><span class="java1-number">2</span><span class="java1-symbol">, </span><span class="java1-number">2</span><span class="java1-symbol">));
+    bGruen.addActionListener(</span><span class="java1-reservedword">new</span><span class="java1-space"> ActionListener() { 
+      </span><span class="java1-reservedword">public</span><span class="java1-space"> </span><span class="java1-reservedword">void</span><span class="java1-space"> actionPerformed(ActionEvent evt) { 
+        bGruen_ActionPerformed(evt);
+      }
+    });
+    bGruen.setBackground(Color.GREEN);
+    bGruen.setFont(</span><span class="java1-reservedword">new</span><span class="java1-space"> Font(</span><span class="java1-string">&quot;@Malgun Gothic&quot;</span><span class="java1-symbol">, Font.BOLD, </span><span class="java1-number">12</span><span class="java1-symbol">));
+    bGruen.setForeground(Color.YELLOW);
+    bGruen.setVisible(</span><span class="java1-reservedword">false</span><span class="java1-symbol">);
+    cp.add(bGruen);
+    bWeiter.setBounds(</span><span class="java1-number">865</span><span class="java1-symbol">, </span><span class="java1-number">280</span><span class="java1-symbol">, </span><span class="java1-number">60</span><span class="java1-symbol">, </span><span class="java1-number">40</span><span class="java1-symbol">);
+    bWeiter.setText(</span><span class="java1-string">&quot;Weiter&quot;</span><span class="java1-symbol">);
+    bWeiter.setMargin(</span><span class="java1-reservedword">new</span><span class="java1-space"> Insets(</span><span class="java1-number">2</span><span class="java1-symbol">, </span><span class="java1-number">2</span><span class="java1-symbol">, </span><span class="java1-number">2</span><span class="java1-symbol">, </span><span class="java1-number">2</span><span class="java1-symbol">));
+    bWeiter.addActionListener(</span><span class="java1-reservedword">new</span><span class="java1-space"> ActionListener() { 
+      </span><span class="java1-reservedword">public</span><span class="java1-space"> </span><span class="java1-reservedword">void</span><span class="java1-space"> actionPerformed(ActionEvent evt) { 
+        bWeiter_ActionPerformed(evt);
+      }
+    });
+    bWeiter.setBackground(Color.CYAN);
+    bWeiter.setFont(</span><span class="java1-reservedword">new</span><span class="java1-space"> Font(</span><span class="java1-string">&quot;@Malgun Gothic&quot;</span><span class="java1-symbol">, Font.BOLD, </span><span class="java1-number">12</span><span class="java1-symbol">));
+    bWeiter.setForeground(</span><span class="java1-reservedword">new</span><span class="java1-space"> Color(</span><span class="java1-number">0x800000</span><span class="java1-symbol">));
+    bWeiter.setVisible(</span><span class="java1-reservedword">false</span><span class="java1-symbol">);
+    cp.add(bWeiter);
+    lAuswertung1.setBounds(</span><span class="java1-number">350</span><span class="java1-symbol">, </span><span class="java1-number">20</span><span class="java1-symbol">, </span><span class="java1-number">300</span><span class="java1-symbol">, </span><span class="java1-number">70</span><span class="java1-symbol">);
+    lAuswertung1.setText(</span><span class="java1-string">&quot;Auswertung:&quot;</span><span class="java1-symbol">);
+    lAuswertung1.setBackground(Color.CYAN);
+    lAuswertung1.setOpaque(</span><span class="java1-reservedword">true</span><span class="java1-symbol">);
+    lAuswertung1.setForeground(</span><span class="java1-reservedword">new</span><span class="java1-space"> Color(</span><span class="java1-number">0x800000</span><span class="java1-symbol">));
+    lAuswertung1.setHorizontalAlignment(SwingConstants.CENTER);
+    lAuswertung1.setFont(</span><span class="java1-reservedword">new</span><span class="java1-space"> Font(</span><span class="java1-string">&quot;@Malgun Gothic&quot;</span><span class="java1-symbol">, Font.BOLD, </span><span class="java1-number">48</span><span class="java1-symbol">));
+    lAuswertung1.setVisible(</span><span class="java1-reservedword">false</span><span class="java1-symbol">);
+    cp.add(lAuswertung1);
+    lSiehabenfolgendeFarbenausgewaehlt.setBounds(</span><span class="java1-number">75</span><span class="java1-symbol">, </span><span class="java1-number">150</span><span class="java1-symbol">, </span><span class="java1-number">457</span><span class="java1-symbol">, </span><span class="java1-number">36</span><span class="java1-symbol">);
+    lSiehabenfolgendeFarbenausgewaehlt.setText(</span><span class="java1-string">&quot;Sie haben folgende Farben ausgewählt:&quot;</span><span class="java1-symbol">);
+    lSiehabenfolgendeFarbenausgewaehlt.setBackground(</span><span class="java1-reservedword">new</span><span class="java1-space"> Color(</span><span class="java1-number">0xFFC800</span><span class="java1-symbol">));
+    lSiehabenfolgendeFarbenausgewaehlt.setOpaque(</span><span class="java1-reservedword">true</span><span class="java1-symbol">);
+    lSiehabenfolgendeFarbenausgewaehlt.setFont(</span><span class="java1-reservedword">new</span><span class="java1-space"> Font(</span><span class="java1-string">&quot;@Malgun Gothic&quot;</span><span class="java1-symbol">, Font.BOLD, </span><span class="java1-number">24</span><span class="java1-symbol">));
+    lSiehabenfolgendeFarbenausgewaehlt.setForeground(</span><span class="java1-reservedword">new</span><span class="java1-space"> Color(</span><span class="java1-number">0x800080</span><span class="java1-symbol">));
+    lSiehabenfolgendeFarbenausgewaehlt.setHorizontalAlignment(SwingConstants.CENTER);
+    lSiehabenfolgendeFarbenausgewaehlt.setVisible(</span><span class="java1-reservedword">false</span><span class="java1-symbol">);
+    cp.add(lSiehabenfolgendeFarbenausgewaehlt);
+    lEswurdenfolgendeFarbengezogen.setBounds(</span><span class="java1-number">75</span><span class="java1-symbol">, </span><span class="java1-number">300</span><span class="java1-symbol">, </span><span class="java1-number">430</span><span class="java1-symbol">, </span><span class="java1-number">36</span><span class="java1-symbol">);
+    lEswurdenfolgendeFarbengezogen.setText(</span><span class="java1-string">&quot;Es wurden folgende Farben gezogen:&quot;</span><span class="java1-symbol">);
+    lEswurdenfolgendeFarbengezogen.setBackground(</span><span class="java1-reservedword">new</span><span class="java1-space"> Color(</span><span class="java1-number">0xFFC800</span><span class="java1-symbol">));
+    lEswurdenfolgendeFarbengezogen.setOpaque(</span><span class="java1-reservedword">true</span><span class="java1-symbol">);
+    lEswurdenfolgendeFarbengezogen.setFont(</span><span class="java1-reservedword">new</span><span class="java1-space"> Font(</span><span class="java1-string">&quot;@Malgun Gothic&quot;</span><span class="java1-symbol">, Font.BOLD, </span><span class="java1-number">24</span><span class="java1-symbol">));
+    lEswurdenfolgendeFarbengezogen.setForeground(</span><span class="java1-reservedword">new</span><span class="java1-space"> Color(</span><span class="java1-number">0x800080</span><span class="java1-symbol">));
+    lEswurdenfolgendeFarbengezogen.setVisible(</span><span class="java1-reservedword">false</span><span class="java1-symbol">);
+    cp.add(lEswurdenfolgendeFarbengezogen);
+    lSchwarz.setBounds(</span><span class="java1-number">75</span><span class="java1-symbol">, </span><span class="java1-number">350</span><span class="java1-symbol">, </span><span class="java1-number">100</span><span class="java1-symbol">, </span><span class="java1-number">60</span><span class="java1-symbol">);
+    lSchwarz.setText(</span><span class="java1-string">&quot;Schwarz&quot;</span><span class="java1-symbol">);
+    lSchwarz.setBackground(Color.BLACK);
+    lSchwarz.setOpaque(</span><span class="java1-reservedword">true</span><span class="java1-symbol">);
+    lSchwarz.setFont(</span><span class="java1-reservedword">new</span><span class="java1-space"> Font(</span><span class="java1-string">&quot;@Malgun Gothic&quot;</span><span class="java1-symbol">, Font.BOLD, </span><span class="java1-number">12</span><span class="java1-symbol">));
+    lSchwarz.setForeground(Color.WHITE);
+    lSchwarz.setVisible(</span><span class="java1-reservedword">false</span><span class="java1-symbol">);
+    lSchwarz.setHorizontalAlignment(SwingConstants.CENTER);
+    cp.add(lSchwarz);
+    lWeiss.setBounds(</span><span class="java1-number">225</span><span class="java1-symbol">, </span><span class="java1-number">350</span><span class="java1-symbol">, </span><span class="java1-number">100</span><span class="java1-symbol">, </span><span class="java1-number">60</span><span class="java1-symbol">);
+    lWeiss.setText(</span><span class="java1-string">&quot;Weiß&quot;</span><span class="java1-symbol">);
+    lWeiss.setBackground(Color.WHITE);
+    lWeiss.setOpaque(</span><span class="java1-reservedword">true</span><span class="java1-symbol">);
+    lWeiss.setFont(</span><span class="java1-reservedword">new</span><span class="java1-space"> Font(</span><span class="java1-string">&quot;@Malgun Gothic&quot;</span><span class="java1-symbol">, Font.BOLD, </span><span class="java1-number">12</span><span class="java1-symbol">));
+    lWeiss.setForeground(Color.BLACK);
+    lWeiss.setHorizontalAlignment(SwingConstants.CENTER);
+    lWeiss.setVisible(</span><span class="java1-reservedword">false</span><span class="java1-symbol">);
+    cp.add(lWeiss);
+    lRot.setBounds(</span><span class="java1-number">375</span><span class="java1-symbol">, </span><span class="java1-number">350</span><span class="java1-symbol">, </span><span class="java1-number">100</span><span class="java1-symbol">, </span><span class="java1-number">60</span><span class="java1-symbol">);
+    lRot.setText(</span><span class="java1-string">&quot;Rot&quot;</span><span class="java1-symbol">);
+    lRot.setBackground(Color.RED);
+    lRot.setOpaque(</span><span class="java1-reservedword">true</span><span class="java1-symbol">);
+    lRot.setFont(</span><span class="java1-reservedword">new</span><span class="java1-space"> Font(</span><span class="java1-string">&quot;@Malgun Gothic&quot;</span><span class="java1-symbol">, Font.BOLD, </span><span class="java1-number">12</span><span class="java1-symbol">));
+    lRot.setForeground(Color.BLUE);
+    lRot.setHorizontalAlignment(SwingConstants.CENTER);
+    lRot.setVisible(</span><span class="java1-reservedword">false</span><span class="java1-symbol">);
+    cp.add(lRot);
+    lBlau.setBounds(</span><span class="java1-number">525</span><span class="java1-symbol">, </span><span class="java1-number">350</span><span class="java1-symbol">, </span><span class="java1-number">100</span><span class="java1-symbol">, </span><span class="java1-number">60</span><span class="java1-symbol">);
+    lBlau.setText(</span><span class="java1-string">&quot;Blau&quot;</span><span class="java1-symbol">);
+    lBlau.setBackground(Color.BLUE);
+    lBlau.setOpaque(</span><span class="java1-reservedword">true</span><span class="java1-symbol">);
+    lBlau.setFont(</span><span class="java1-reservedword">new</span><span class="java1-space"> Font(</span><span class="java1-string">&quot;@Malgun Gothic&quot;</span><span class="java1-symbol">, Font.BOLD, </span><span class="java1-number">12</span><span class="java1-symbol">));
+    lBlau.setForeground(Color.RED);
+    lBlau.setHorizontalAlignment(SwingConstants.CENTER);
+    lBlau.setVisible(</span><span class="java1-reservedword">false</span><span class="java1-symbol">);
+    cp.add(lBlau);
+    lGelb.setBounds(</span><span class="java1-number">675</span><span class="java1-symbol">, </span><span class="java1-number">350</span><span class="java1-symbol">, </span><span class="java1-number">100</span><span class="java1-symbol">, </span><span class="java1-number">60</span><span class="java1-symbol">);
+    lGelb.setText(</span><span class="java1-string">&quot;Gelb&quot;</span><span class="java1-symbol">);
+    lGelb.setBackground(Color.YELLOW);
+    lGelb.setOpaque(</span><span class="java1-reservedword">true</span><span class="java1-symbol">);
+    lGelb.setFont(</span><span class="java1-reservedword">new</span><span class="java1-space"> Font(</span><span class="java1-string">&quot;@Malgun Gothic&quot;</span><span class="java1-symbol">, Font.BOLD, </span><span class="java1-number">12</span><span class="java1-symbol">));
+    lGelb.setForeground(</span><span class="java1-reservedword">new</span><span class="java1-space"> Color(</span><span class="java1-number">0x008000</span><span class="java1-symbol">));
+    lGelb.setHorizontalAlignment(SwingConstants.CENTER);
+    lGelb.setVisible(</span><span class="java1-reservedword">false</span><span class="java1-symbol">);
+    cp.add(lGelb);
+    lGruen.setBounds(</span><span class="java1-number">825</span><span class="java1-symbol">, </span><span class="java1-number">350</span><span class="java1-symbol">, </span><span class="java1-number">100</span><span class="java1-symbol">, </span><span class="java1-number">60</span><span class="java1-symbol">);
+    lGruen.setText(</span><span class="java1-string">&quot;Grün&quot;</span><span class="java1-symbol">);
+    lGruen.setBackground(Color.GREEN);
+    lGruen.setOpaque(</span><span class="java1-reservedword">true</span><span class="java1-symbol">);
+    lGruen.setFont(</span><span class="java1-reservedword">new</span><span class="java1-space"> Font(</span><span class="java1-string">&quot;@Malgun Gothic&quot;</span><span class="java1-symbol">, Font.BOLD, </span><span class="java1-number">12</span><span class="java1-symbol">));
+    lGruen.setForeground(Color.YELLOW);
+    lGruen.setHorizontalAlignment(SwingConstants.CENTER);
+    lGruen.setVisible(</span><span class="java1-reservedword">false</span><span class="java1-symbol">);
+    cp.add(lGruen);
+    bWeiter1.setBounds(</span><span class="java1-number">865</span><span class="java1-symbol">, </span><span class="java1-number">430</span><span class="java1-symbol">, </span><span class="java1-number">60</span><span class="java1-symbol">, </span><span class="java1-number">40</span><span class="java1-symbol">);
+    bWeiter1.setText(</span><span class="java1-string">&quot;Weiter&quot;</span><span class="java1-symbol">);
+    bWeiter1.setMargin(</span><span class="java1-reservedword">new</span><span class="java1-space"> Insets(</span><span class="java1-number">2</span><span class="java1-symbol">, </span><span class="java1-number">2</span><span class="java1-symbol">, </span><span class="java1-number">2</span><span class="java1-symbol">, </span><span class="java1-number">2</span><span class="java1-symbol">));
+    bWeiter1.addActionListener(</span><span class="java1-reservedword">new</span><span class="java1-space"> ActionListener() { 
+      </span><span class="java1-reservedword">public</span><span class="java1-space"> </span><span class="java1-reservedword">void</span><span class="java1-space"> actionPerformed(ActionEvent evt) { 
+        bWeiter1_ActionPerformed(evt);
+      }
+    });
+    bWeiter1.setBackground(Color.CYAN);
+    bWeiter1.setFont(</span><span class="java1-reservedword">new</span><span class="java1-space"> Font(</span><span class="java1-string">&quot;@Malgun Gothic&quot;</span><span class="java1-symbol">, Font.BOLD, </span><span class="java1-number">12</span><span class="java1-symbol">));
+    bWeiter1.setForeground(</span><span class="java1-reservedword">new</span><span class="java1-space"> Color(</span><span class="java1-number">0x800000</span><span class="java1-symbol">));
+    bWeiter1.setVisible(</span><span class="java1-reservedword">false</span><span class="java1-symbol">);
+    cp.add(bWeiter1);
+
+    lPunktezahl.setBounds(</span><span class="java1-number">75</span><span class="java1-symbol">, </span><span class="java1-number">450</span><span class="java1-symbol">, </span><span class="java1-number">80</span><span class="java1-symbol">, </span><span class="java1-number">36</span><span class="java1-symbol">);
+    lPunktezahl.setText(</span><span class="java1-string">&quot;Punktezahl: &quot;</span><span class="java1-symbol">+Punktezahl);
+    lPunktezahl.setBackground(</span><span class="java1-reservedword">new</span><span class="java1-space"> Color(</span><span class="java1-number">0xFFC800</span><span class="java1-symbol">));
+    lPunktezahl.setOpaque(</span><span class="java1-reservedword">true</span><span class="java1-symbol">);
+    lPunktezahl.setFont(</span><span class="java1-reservedword">new</span><span class="java1-space"> Font(</span><span class="java1-string">&quot;@Malgun Gothic&quot;</span><span class="java1-symbol">, Font.BOLD, </span><span class="java1-number">12</span><span class="java1-symbol">));
+    lPunktezahl.setForeground(</span><span class="java1-reservedword">new</span><span class="java1-space"> Color(</span><span class="java1-number">0x800080</span><span class="java1-symbol">));
+    lPunktezahl.setVisible(</span><span class="java1-reservedword">false</span><span class="java1-symbol">);
+    cp.add(lPunktezahl);
+    lDasSpielistvorbei1.setBounds(</span><span class="java1-number">184</span><span class="java1-symbol">, </span><span class="java1-number">250</span><span class="java1-symbol">, </span><span class="java1-number">632</span><span class="java1-symbol">, </span><span class="java1-number">70</span><span class="java1-symbol">);
+    lDasSpielistvorbei1.setText(</span><span class="java1-string">&quot;Das Spiel ist vorbei!!!&quot;</span><span class="java1-symbol">);
+    lDasSpielistvorbei1.setBackground(</span><span class="java1-reservedword">new</span><span class="java1-space"> Color(</span><span class="java1-number">0xFFC800</span><span class="java1-symbol">));
+    lDasSpielistvorbei1.setOpaque(</span><span class="java1-reservedword">true</span><span class="java1-symbol">);
+    lDasSpielistvorbei1.setFont(</span><span class="java1-reservedword">new</span><span class="java1-space"> Font(</span><span class="java1-string">&quot;@Malgun Gothic&quot;</span><span class="java1-symbol">, Font.BOLD, </span><span class="java1-number">48</span><span class="java1-symbol">));
+    lDasSpielistvorbei1.setForeground(</span><span class="java1-reservedword">new</span><span class="java1-space"> Color(</span><span class="java1-number">0x800080</span><span class="java1-symbol">));
+    lDasSpielistvorbei1.setHorizontalAlignment(SwingConstants.CENTER);
+    lDasSpielistvorbei1.setVisible(</span><span class="java1-reservedword">false</span><span class="java1-symbol">);
+    cp.add(lDasSpielistvorbei1);
+    lSiehaben.setBounds(</span><span class="java1-number">0</span><span class="java1-symbol">, </span><span class="java1-number">350</span><span class="java1-symbol">, </span><span class="java1-number">1000</span><span class="java1-symbol">, </span><span class="java1-number">36</span><span class="java1-symbol">);
+    lSiehaben.setText(</span><span class="java1-string">&quot;Sie haben&quot;</span><span class="java1-symbol">);
+    lSiehaben.setBackground(Color.MAGENTA);
+    lSiehaben.setOpaque(</span><span class="java1-reservedword">true</span><span class="java1-symbol">);
+    lSiehaben.setForeground(</span><span class="java1-reservedword">new</span><span class="java1-space"> Color(</span><span class="java1-number">0x808000</span><span class="java1-symbol">));
+    lSiehaben.setFont(</span><span class="java1-reservedword">new</span><span class="java1-space"> Font(</span><span class="java1-string">&quot;@Malgun Gothic&quot;</span><span class="java1-symbol">, Font.BOLD, </span><span class="java1-number">24</span><span class="java1-symbol">));
+    lSiehaben.setHorizontalAlignment(SwingConstants.CENTER);
+    lSiehaben.setVisible(</span><span class="java1-reservedword">false</span><span class="java1-symbol">);
+    cp.add(lSiehaben);
+    lDiesesSpielwurdevonLucaBaeckprogrammiert.setBounds(</span><span class="java1-number">218</span><span class="java1-symbol">, </span><span class="java1-number">500</span><span class="java1-symbol">, </span><span class="java1-number">564</span><span class="java1-symbol">, </span><span class="java1-number">49</span><span class="java1-symbol">);
+    lDiesesSpielwurdevonLucaBaeckprogrammiert.setText(</span><span class="java1-string">&quot;Dieses Spiel wurde von Luca Bäck programmiert.&quot;</span><span class="java1-symbol">);
+    lDiesesSpielwurdevonLucaBaeckprogrammiert.setBackground(</span><span class="java1-reservedword">new</span><span class="java1-space"> Color(</span><span class="java1-number">0x404040</span><span class="java1-symbol">));
+    lDiesesSpielwurdevonLucaBaeckprogrammiert.setOpaque(</span><span class="java1-reservedword">true</span><span class="java1-symbol">);
+    lDiesesSpielwurdevonLucaBaeckprogrammiert.setFont(</span><span class="java1-reservedword">new</span><span class="java1-space"> Font(</span><span class="java1-string">&quot;@Malgun Gothic&quot;</span><span class="java1-symbol">, Font.BOLD, </span><span class="java1-number">24</span><span class="java1-symbol">));
+    lDiesesSpielwurdevonLucaBaeckprogrammiert.setForeground(Color.WHITE);
+    lDiesesSpielwurdevonLucaBaeckprogrammiert.setHorizontalAlignment(SwingConstants.CENTER);
+    cp.add(lDiesesSpielwurdevonLucaBaeckprogrammiert);
+    bHier.setBounds(</span><span class="java1-number">470</span><span class="java1-symbol">, </span><span class="java1-number">575</span><span class="java1-symbol">, </span><span class="java1-number">60</span><span class="java1-symbol">, </span><span class="java1-number">33</span><span class="java1-symbol">);
+    bHier.setText(</span><span class="java1-string">&quot;hier!&quot;</span><span class="java1-symbol">);
+    bHier.setMargin(</span><span class="java1-reservedword">new</span><span class="java1-space"> Insets(</span><span class="java1-number">2</span><span class="java1-symbol">, </span><span class="java1-number">2</span><span class="java1-symbol">, </span><span class="java1-number">2</span><span class="java1-symbol">, </span><span class="java1-number">2</span><span class="java1-symbol">));
+    bHier.addActionListener(</span><span class="java1-reservedword">new</span><span class="java1-space"> ActionListener() { 
+      </span><span class="java1-reservedword">public</span><span class="java1-space"> </span><span class="java1-reservedword">void</span><span class="java1-space"> actionPerformed(ActionEvent evt) { 
+        bHier_ActionPerformed(evt);
+      }
+    });
+    bHier.setForeground(Color.BLACK);
+    Hashtable&lt;TextAttribute, Object&gt; bHier_map = </span><span class="java1-reservedword">new</span><span class="java1-space"> Hashtable&lt;TextAttribute, Object&gt;();
+    bHier_map.put(TextAttribute.FAMILY, </span><span class="java1-string">&quot;@Malgun Gothic&quot;</span><span class="java1-symbol">);
+    bHier_map.put(TextAttribute.SIZE, </span><span class="java1-reservedword">new</span><span class="java1-space"> Integer(</span><span class="java1-number">20</span><span class="java1-symbol">));
+    bHier_map.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
+    bHier.setFont(</span><span class="java1-reservedword">new</span><span class="java1-space"> Font(bHier_map));
+    bHier.setVisible(</span><span class="java1-reservedword">false</span><span class="java1-symbol">);
+    bHier.setBackground(Color.WHITE);
+    cp.add(bHier);
+    lUmdasSpielzubeendenklickensie.setBounds(</span><span class="java1-number">324</span><span class="java1-symbol">, </span><span class="java1-number">540</span><span class="java1-symbol">, </span><span class="java1-number">352</span><span class="java1-symbol">, </span><span class="java1-number">33</span><span class="java1-symbol">);
+    lUmdasSpielzubeendenklickensie.setText(</span><span class="java1-string">&quot;Um das Spiel zu beenden klicken sie&quot;</span><span class="java1-symbol">);
+    lUmdasSpielzubeendenklickensie.setFont(</span><span class="java1-reservedword">new</span><span class="java1-space"> Font(</span><span class="java1-string">&quot;@Malgun Gothic&quot;</span><span class="java1-symbol">, Font.BOLD, </span><span class="java1-number">20</span><span class="java1-symbol">));
+    lUmdasSpielzubeendenklickensie.setForeground(Color.BLACK);
+    lUmdasSpielzubeendenklickensie.setHorizontalAlignment(SwingConstants.CENTER);
+    lUmdasSpielzubeendenklickensie.setVisible(</span><span class="java1-reservedword">false</span><span class="java1-symbol">);
+    lUmdasSpielzubeendenklickensie.setBackground(Color.WHITE);
+    lUmdasSpielzubeendenklickensie.setOpaque(</span><span class="java1-reservedword">true</span><span class="java1-symbol">);
+    cp.add(lUmdasSpielzubeendenklickensie);
+    
+    lInstaluca.setBounds(</span><span class="java1-number">841</span><span class="java1-symbol">, </span><span class="java1-number">562</span><span class="java1-symbol">, </span><span class="java1-number">102</span><span class="java1-symbol">, </span><span class="java1-number">25</span><span class="java1-symbol">);
+    lInstaluca.setText(</span><span class="java1-string">&quot; Insta: luca99899&quot;</span><span class="java1-symbol">);
+    lInstaluca.setBackground(</span><span class="java1-reservedword">new</span><span class="java1-space"> Color(</span><span class="java1-number">0x404040</span><span class="java1-symbol">));
+    lInstaluca.setOpaque(</span><span class="java1-reservedword">true</span><span class="java1-symbol">);
+    lInstaluca.setForeground(Color.WHITE);
+    Hashtable&lt;TextAttribute, Object&gt; jLabel1_map = </span><span class="java1-reservedword">new</span><span class="java1-space"> Hashtable&lt;TextAttribute, Object&gt;();
+    jLabel1_map.put(TextAttribute.FAMILY, </span><span class="java1-string">&quot;@Malgun Gothic&quot;</span><span class="java1-symbol">);
+    jLabel1_map.put(TextAttribute.SIZE, </span><span class="java1-reservedword">new</span><span class="java1-space"> Integer(</span><span class="java1-number">12</span><span class="java1-symbol">));
+    jLabel1_map.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
+    lInstaluca.setFont(</span><span class="java1-reservedword">new</span><span class="java1-space"> Font(jLabel1_map));
+    lInstaluca.setHorizontalAlignment(SwingConstants.CENTER);
+    cp.add(lInstaluca);
+    </span><span class="java1-comment">// Ende Komponenten
+</span><span class="java1-space">    
+    setVisible(</span><span class="java1-reservedword">true</span><span class="java1-symbol">);
+  } </span><span class="java1-comment">// end of public Mastermind
+</span><span class="java1-space">  
+  </span><span class="java1-comment">// Anfang Methoden
+</span><span class="java1-space">  
+  </span><span class="java1-reservedword">public</span><span class="java1-space"> </span><span class="java1-reservedword">static</span><span class="java1-space"> </span><span class="java1-reservedword">void</span><span class="java1-space"> main(String[] args) {
+    </span><span class="java1-reservedword">new</span><span class="java1-space"> Mastermind();
+     
+  } </span><span class="java1-comment">// end of main
+</span><span class="java1-space">  
+ 
+   </span><span class="java1-reservedword">int</span><span class="java1-space"> klick=</span><span class="java1-number">0</span><span class="java1-symbol">;
+  </span><span class="java1-reservedword">boolean</span><span class="java1-space"> sg;
+  </span><span class="java1-reservedword">boolean</span><span class="java1-space"> wg;
+  </span><span class="java1-reservedword">boolean</span><span class="java1-space"> rg;
+  </span><span class="java1-reservedword">boolean</span><span class="java1-space"> bg;
+  </span><span class="java1-reservedword">boolean</span><span class="java1-space"> geg;
+  </span><span class="java1-reservedword">boolean</span><span class="java1-space"> grg;
+  </span><span class="java1-reservedword">boolean</span><span class="java1-space"> sgz;
+  </span><span class="java1-reservedword">boolean</span><span class="java1-space"> wgz;
+  </span><span class="java1-reservedword">boolean</span><span class="java1-space"> rgz;
+  </span><span class="java1-reservedword">boolean</span><span class="java1-space"> bgz;
+  </span><span class="java1-reservedword">boolean</span><span class="java1-space"> gegz;
+  </span><span class="java1-reservedword">boolean</span><span class="java1-space"> grgz;
+  </span><span class="java1-reservedword">int</span><span class="java1-space"> n;
+   Random generator = </span><span class="java1-reservedword">new</span><span class="java1-space"> Random();
+  </span><span class="java1-reservedword">public</span><span class="java1-space"> </span><span class="java1-reservedword">void</span><span class="java1-space"> bStart_ActionPerformed(ActionEvent evt) {
+    </span><span class="java1-comment">// TODO hier Quelltext einfügen
+</span><span class="java1-space">     bStart.setVisible(</span><span class="java1-reservedword">false</span><span class="java1-symbol">);
+      lMastermind.setBounds(</span><span class="java1-number">216</span><span class="java1-symbol">, </span><span class="java1-number">10</span><span class="java1-symbol">, </span><span class="java1-number">568</span><span class="java1-symbol">, </span><span class="java1-number">100</span><span class="java1-symbol">);
+    lMastermind.setBounds(</span><span class="java1-number">0</span><span class="java1-symbol">, </span><span class="java1-number">540</span><span class="java1-symbol">, </span><span class="java1-number">1000</span><span class="java1-symbol">, </span><span class="java1-number">75</span><span class="java1-symbol">);
+    lBitteklickensievierderfolgendenFarbenan.setVisible(</span><span class="java1-reservedword">true</span><span class="java1-symbol">);
+    bGruen.setVisible(</span><span class="java1-reservedword">true</span><span class="java1-symbol">);
+    bGelb.setVisible(</span><span class="java1-reservedword">true</span><span class="java1-symbol">);
+    bBlau.setVisible(</span><span class="java1-reservedword">true</span><span class="java1-symbol">);
+    bRot.setVisible(</span><span class="java1-reservedword">true</span><span class="java1-symbol">);
+    bWeiss.setVisible(</span><span class="java1-reservedword">true</span><span class="java1-symbol">);
+    bSchwarz.setVisible(</span><span class="java1-reservedword">true</span><span class="java1-symbol">);
+    bWeiter.setVisible(</span><span class="java1-reservedword">true</span><span class="java1-symbol">);
+    lPunktezahl.setVisible(</span><span class="java1-reservedword">true</span><span class="java1-symbol">);
+    lDiesesSpielwurdevonLucaBaeckprogrammiert.setVisible(</span><span class="java1-reservedword">false</span><span class="java1-symbol">); 
+    lInstaluca.setVisible(</span><span class="java1-reservedword">false</span><span class="java1-symbol">);
+ 
+   
+  } </span><span class="java1-comment">// end of bStart_ActionPerformed
+</span><span class="java1-space">    
+  </span><span class="java1-reservedword">public</span><span class="java1-space"> </span><span class="java1-reservedword">void</span><span class="java1-space"> bSchwarz_ActionPerformed(ActionEvent evt) {
+    </span><span class="java1-comment">// TODO hier Quelltext einfügen
+</span><span class="java1-space">    </span><span class="java1-reservedword">if</span><span class="java1-space"> (klick&lt;</span><span class="java1-number">4</span><span class="java1-symbol">) {
+      bSchwarz.setVisible(</span><span class="java1-reservedword">false</span><span class="java1-symbol">);
+      klick++;
+      sg=</span><span class="java1-reservedword">true</span><span class="java1-symbol">;
+    } </span><span class="java1-comment">// end of if
+</span><span class="java1-space">  } </span><span class="java1-comment">// end of bSchwarz_ActionPerformed
+
+</span><span class="java1-space">  </span><span class="java1-reservedword">public</span><span class="java1-space"> </span><span class="java1-reservedword">void</span><span class="java1-space"> bWeiss_ActionPerformed(ActionEvent evt) {
+    </span><span class="java1-comment">// TODO hier Quelltext einfügen
+</span><span class="java1-space">     </span><span class="java1-reservedword">if</span><span class="java1-space"> (klick&lt;</span><span class="java1-number">4</span><span class="java1-symbol">) {
+      bWeiss.setVisible(</span><span class="java1-reservedword">false</span><span class="java1-symbol">);
+      klick++;
+      wg=</span><span class="java1-reservedword">true</span><span class="java1-symbol">;
+    } </span><span class="java1-comment">// end of if
+</span><span class="java1-space">  } </span><span class="java1-comment">// end of bWeiss_ActionPerformed
+
+</span><span class="java1-space">  </span><span class="java1-reservedword">public</span><span class="java1-space"> </span><span class="java1-reservedword">void</span><span class="java1-space"> bRot_ActionPerformed(ActionEvent evt) {
+    </span><span class="java1-comment">// TODO hier Quelltext einfügen
+</span><span class="java1-space">     </span><span class="java1-reservedword">if</span><span class="java1-space"> (klick&lt;</span><span class="java1-number">4</span><span class="java1-symbol">) {
+      bRot.setVisible(</span><span class="java1-reservedword">false</span><span class="java1-symbol">);
+      klick++;
+      rg=</span><span class="java1-reservedword">true</span><span class="java1-symbol">;
+    } </span><span class="java1-comment">// end of if
+</span><span class="java1-space">  } </span><span class="java1-comment">// end of bRot_ActionPerformed
+
+</span><span class="java1-space">  </span><span class="java1-reservedword">public</span><span class="java1-space"> </span><span class="java1-reservedword">void</span><span class="java1-space"> bBlau_ActionPerformed(ActionEvent evt) {
+    </span><span class="java1-comment">// TODO hier Quelltext einfügen
+</span><span class="java1-space">     </span><span class="java1-reservedword">if</span><span class="java1-space"> (klick&lt;</span><span class="java1-number">4</span><span class="java1-symbol">) {
+      bBlau.setVisible(</span><span class="java1-reservedword">false</span><span class="java1-symbol">);
+      klick++;
+      bg=</span><span class="java1-reservedword">true</span><span class="java1-symbol">;
+    } </span><span class="java1-comment">// end of if
+</span><span class="java1-space">  } </span><span class="java1-comment">// end of bBlau_ActionPerformed
+
+</span><span class="java1-space">  </span><span class="java1-reservedword">public</span><span class="java1-space"> </span><span class="java1-reservedword">void</span><span class="java1-space"> bGelb_ActionPerformed(ActionEvent evt) {
+    </span><span class="java1-comment">// TODO hier Quelltext einfügen
+</span><span class="java1-space">     </span><span class="java1-reservedword">if</span><span class="java1-space"> (klick&lt;</span><span class="java1-number">4</span><span class="java1-symbol">) {
+      bGelb.setVisible(</span><span class="java1-reservedword">false</span><span class="java1-symbol">);
+      klick++;
+      geg=</span><span class="java1-reservedword">true</span><span class="java1-symbol">;
+    } </span><span class="java1-comment">// end of if
+</span><span class="java1-space">  } </span><span class="java1-comment">// end of bGelb_ActionPerformed
+
+</span><span class="java1-space">  </span><span class="java1-reservedword">public</span><span class="java1-space"> </span><span class="java1-reservedword">void</span><span class="java1-space"> bGruen_ActionPerformed(ActionEvent evt) {
+    </span><span class="java1-comment">// TODO hier Quelltext einfügen
+</span><span class="java1-space">     </span><span class="java1-reservedword">if</span><span class="java1-space"> (klick&lt;</span><span class="java1-number">4</span><span class="java1-symbol">) {
+      bGruen.setVisible(</span><span class="java1-reservedword">false</span><span class="java1-symbol">);
+     klick++;
+      grg=</span><span class="java1-reservedword">true</span><span class="java1-symbol">;
+    } </span><span class="java1-comment">// end of if
+</span><span class="java1-space">  } </span><span class="java1-comment">// end of bGruen_ActionPerformed
+
+</span><span class="java1-space">  </span><span class="java1-reservedword">public</span><span class="java1-space"> </span><span class="java1-reservedword">void</span><span class="java1-space"> bWeiter_ActionPerformed(ActionEvent evt) {
+    </span><span class="java1-comment">// TODO hier Quelltext einfügen
+</span><span class="java1-space">     </span><span class="java1-reservedword">if</span><span class="java1-space"> (klick==</span><span class="java1-number">4</span><span class="java1-symbol">) {
+       bGruen.setVisible(</span><span class="java1-reservedword">false</span><span class="java1-symbol">);
+    bGelb.setVisible(</span><span class="java1-reservedword">false</span><span class="java1-symbol">);
+    bBlau.setVisible(</span><span class="java1-reservedword">false</span><span class="java1-symbol">);
+    bRot.setVisible(</span><span class="java1-reservedword">false</span><span class="java1-symbol">);
+    bWeiss.setVisible(</span><span class="java1-reservedword">false</span><span class="java1-symbol">);
+    bSchwarz.setVisible(</span><span class="java1-reservedword">false</span><span class="java1-symbol">);
+    bWeiter.setVisible(</span><span class="java1-reservedword">false</span><span class="java1-symbol">);
+    lBitteklickensievierderfolgendenFarbenan.setVisible(</span><span class="java1-reservedword">false</span><span class="java1-symbol">);
+    lAuswertung1.setVisible(</span><span class="java1-reservedword">true</span><span class="java1-symbol">);
+    lSiehabenfolgendeFarbenausgewaehlt.setVisible(</span><span class="java1-reservedword">true</span><span class="java1-symbol">);
+      </span><span class="java1-reservedword">if</span><span class="java1-space"> (sg==</span><span class="java1-reservedword">true</span><span class="java1-symbol">) {
+        bSchwarz.setVisible(</span><span class="java1-reservedword">true</span><span class="java1-symbol">);
+      } </span><span class="java1-comment">// end of if
+</span><span class="java1-space">      </span><span class="java1-reservedword">if</span><span class="java1-space"> (wg==</span><span class="java1-reservedword">true</span><span class="java1-symbol">) {
+        bWeiss.setVisible(</span><span class="java1-reservedword">true</span><span class="java1-symbol">);
+      } </span><span class="java1-comment">// end of if
+</span><span class="java1-space">      </span><span class="java1-reservedword">if</span><span class="java1-space"> (rg==</span><span class="java1-reservedword">true</span><span class="java1-symbol">) {
+        bRot.setVisible(</span><span class="java1-reservedword">true</span><span class="java1-symbol">);
+      } </span><span class="java1-comment">// end of if
+</span><span class="java1-space">      </span><span class="java1-reservedword">if</span><span class="java1-space"> (bg==</span><span class="java1-reservedword">true</span><span class="java1-symbol">) {
+        bBlau.setVisible(</span><span class="java1-reservedword">true</span><span class="java1-symbol">);
+      } </span><span class="java1-comment">// end of if
+</span><span class="java1-space">      </span><span class="java1-reservedword">if</span><span class="java1-space"> (geg==</span><span class="java1-reservedword">true</span><span class="java1-symbol">) {
+        bGelb.setVisible(</span><span class="java1-reservedword">true</span><span class="java1-symbol">);
+      } </span><span class="java1-comment">// end of if
+</span><span class="java1-space">      </span><span class="java1-reservedword">if</span><span class="java1-space"> (grg==</span><span class="java1-reservedword">true</span><span class="java1-symbol">) {
+        bGruen.setVisible(</span><span class="java1-reservedword">true</span><span class="java1-symbol">);
+      } </span><span class="java1-comment">// end of if
+</span><span class="java1-space">      </span><span class="java1-reservedword">try</span><span class="java1-symbol">{
+
+       Thread.sleep(</span><span class="java1-number">1000</span><span class="java1-symbol">);
+      } </span><span class="java1-reservedword">catch</span><span class="java1-symbol">(InterruptedException ex){
+        </span><span class="java1-comment">//do stuff
+</span><span class="java1-space">        }
+      lEswurdenfolgendeFarbengezogen.setVisible(</span><span class="java1-reservedword">true</span><span class="java1-symbol">);
+       </span><span class="java1-reservedword">for</span><span class="java1-space"> (</span><span class="java1-reservedword">int</span><span class="java1-space"> i=</span><span class="java1-number">0</span><span class="java1-symbol">;i&lt;</span><span class="java1-number">4</span><span class="java1-space"> ; ) {
+        n = generator.nextInt(</span><span class="java1-number">6</span><span class="java1-symbol">)+</span><span class="java1-number">1</span><span class="java1-symbol">;
+        </span><span class="java1-reservedword">switch</span><span class="java1-space"> (n) {
+          </span><span class="java1-reservedword">case</span><span class="java1-space"> </span><span class="java1-number">1</span><span class="java1-space">  : 
+            </span><span class="java1-reservedword">if</span><span class="java1-space"> (sgz==</span><span class="java1-reservedword">false</span><span class="java1-symbol">) {
+              sgz=</span><span class="java1-reservedword">true</span><span class="java1-symbol">;
+              lSchwarz.setVisible(</span><span class="java1-reservedword">true</span><span class="java1-symbol">);
+              i++;
+            } </span><span class="java1-comment">// end of if
+</span><span class="java1-space">            </span><span class="java1-reservedword">break</span><span class="java1-symbol">;
+          </span><span class="java1-reservedword">case</span><span class="java1-space"> </span><span class="java1-number">2</span><span class="java1-space"> : 
+            </span><span class="java1-reservedword">if</span><span class="java1-space"> (wgz==</span><span class="java1-reservedword">false</span><span class="java1-symbol">) {
+              wgz=</span><span class="java1-reservedword">true</span><span class="java1-symbol">;
+              lWeiss.setVisible(</span><span class="java1-reservedword">true</span><span class="java1-symbol">);
+              i++;
+            } </span><span class="java1-comment">// end of if
+</span><span class="java1-space">            </span><span class="java1-reservedword">break</span><span class="java1-symbol">;
+          </span><span class="java1-reservedword">case</span><span class="java1-space"> </span><span class="java1-number">3</span><span class="java1-space"> : 
+            </span><span class="java1-reservedword">if</span><span class="java1-space"> (rgz==</span><span class="java1-reservedword">false</span><span class="java1-symbol">) {
+              rgz=</span><span class="java1-reservedword">true</span><span class="java1-symbol">;
+              lRot.setVisible(</span><span class="java1-reservedword">true</span><span class="java1-symbol">);
+              i++;
+            } </span><span class="java1-comment">// end of if
+</span><span class="java1-space">            </span><span class="java1-reservedword">break</span><span class="java1-symbol">;
+          </span><span class="java1-reservedword">case</span><span class="java1-space"> </span><span class="java1-number">4</span><span class="java1-space"> : 
+            </span><span class="java1-reservedword">if</span><span class="java1-space"> (bgz==</span><span class="java1-reservedword">false</span><span class="java1-symbol">) {
+              bgz=</span><span class="java1-reservedword">true</span><span class="java1-symbol">;
+              lBlau.setVisible(</span><span class="java1-reservedword">true</span><span class="java1-symbol">);
+              i++;
+            } </span><span class="java1-comment">// end of if
+</span><span class="java1-space">            </span><span class="java1-reservedword">break</span><span class="java1-symbol">;
+          </span><span class="java1-reservedword">case</span><span class="java1-space"> </span><span class="java1-number">5</span><span class="java1-space"> : 
+            </span><span class="java1-reservedword">if</span><span class="java1-space"> (gegz==</span><span class="java1-reservedword">false</span><span class="java1-symbol">) {
+              gegz=</span><span class="java1-reservedword">true</span><span class="java1-symbol">;
+              lGelb.setVisible(</span><span class="java1-reservedword">true</span><span class="java1-symbol">);
+              i++;
+            } </span><span class="java1-comment">// end of if
+</span><span class="java1-space">            </span><span class="java1-reservedword">break</span><span class="java1-symbol">;
+          </span><span class="java1-reservedword">case</span><span class="java1-space"> </span><span class="java1-number">6</span><span class="java1-space"> : 
+            </span><span class="java1-reservedword">if</span><span class="java1-space"> (grgz==</span><span class="java1-reservedword">false</span><span class="java1-symbol">) {
+              grgz=</span><span class="java1-reservedword">true</span><span class="java1-symbol">;
+              lGruen.setVisible(</span><span class="java1-reservedword">true</span><span class="java1-symbol">);
+              i++;
+            } </span><span class="java1-comment">// end of if
+</span><span class="java1-space">            </span><span class="java1-reservedword">break</span><span class="java1-symbol">;
+           
+            
+        } </span><span class="java1-comment">// end of switch 
+</span><span class="java1-space">       } </span><span class="java1-comment">// end of for
+</span><span class="java1-space">       </span><span class="java1-reservedword">try</span><span class="java1-symbol">{
+
+       Thread.sleep(</span><span class="java1-number">1000</span><span class="java1-symbol">);
+      } </span><span class="java1-reservedword">catch</span><span class="java1-symbol">(InterruptedException ex){
+        </span><span class="java1-comment">//do stuff
+</span><span class="java1-space">        }
+      
+      </span><span class="java1-reservedword">if</span><span class="java1-space"> (sg==</span><span class="java1-reservedword">true</span><span class="java1-space"> &amp;&amp; sgz==</span><span class="java1-reservedword">true</span><span class="java1-symbol">) {
+        Punktezahl++;
+        lPunktezahl.setText(</span><span class="java1-string">&quot;Punktezahl: &quot;</span><span class="java1-symbol">+Punktezahl);
+      } </span><span class="java1-comment">// end of if
+</span><span class="java1-space">      </span><span class="java1-reservedword">if</span><span class="java1-space"> (wg==</span><span class="java1-reservedword">true</span><span class="java1-space"> &amp;&amp; wgz==</span><span class="java1-reservedword">true</span><span class="java1-symbol">) {
+        Punktezahl++;
+        lPunktezahl.setText(</span><span class="java1-string">&quot;Punktezahl: &quot;</span><span class="java1-symbol">+Punktezahl);
+      } </span><span class="java1-comment">// end of if
+</span><span class="java1-space">      </span><span class="java1-reservedword">if</span><span class="java1-space"> (rg==</span><span class="java1-reservedword">true</span><span class="java1-space"> &amp;&amp; rgz==</span><span class="java1-reservedword">true</span><span class="java1-symbol">) {
+        Punktezahl++;
+        lPunktezahl.setText(</span><span class="java1-string">&quot;Punktezahl: &quot;</span><span class="java1-symbol">+Punktezahl);
+      } </span><span class="java1-comment">// end of if
+</span><span class="java1-space">      </span><span class="java1-reservedword">if</span><span class="java1-space"> (bg==</span><span class="java1-reservedword">true</span><span class="java1-space"> &amp;&amp; bgz==</span><span class="java1-reservedword">true</span><span class="java1-symbol">) {
+        Punktezahl++;
+        lPunktezahl.setText(</span><span class="java1-string">&quot;Punktezahl: &quot;</span><span class="java1-symbol">+Punktezahl);
+      } </span><span class="java1-comment">// end of if
+</span><span class="java1-space">      </span><span class="java1-reservedword">if</span><span class="java1-space"> (geg==</span><span class="java1-reservedword">true</span><span class="java1-space"> &amp;&amp; gegz==</span><span class="java1-reservedword">true</span><span class="java1-symbol">) {
+        Punktezahl++;
+        lPunktezahl.setText(</span><span class="java1-string">&quot;Punktezahl: &quot;</span><span class="java1-symbol">+Punktezahl);
+      } </span><span class="java1-comment">// end of if
+</span><span class="java1-space">      </span><span class="java1-reservedword">if</span><span class="java1-space"> (grg==</span><span class="java1-reservedword">true</span><span class="java1-space"> &amp;&amp; grgz==</span><span class="java1-reservedword">true</span><span class="java1-symbol">) {
+        Punktezahl++;
+        lPunktezahl.setText(</span><span class="java1-string">&quot;Punktezahl: &quot;</span><span class="java1-symbol">+Punktezahl);
+      } </span><span class="java1-comment">// end of if
+</span><span class="java1-space">      
+      bWeiter1.setVisible(</span><span class="java1-reservedword">true</span><span class="java1-symbol">);  
+  } </span><span class="java1-comment">// end of if 
+</span><span class="java1-space">  } </span><span class="java1-comment">// end of bWeiter_ActionPerformed
+
+</span><span class="java1-space">  </span><span class="java1-reservedword">public</span><span class="java1-space"> </span><span class="java1-reservedword">void</span><span class="java1-space"> bWeiter1_ActionPerformed(ActionEvent evt) {
+    </span><span class="java1-comment">// TODO hier Quelltext einfügen
+</span><span class="java1-space">    bWeiter1.setVisible(</span><span class="java1-reservedword">false</span><span class="java1-symbol">);
+    lMastermind.setBounds(</span><span class="java1-number">216</span><span class="java1-symbol">, </span><span class="java1-number">10</span><span class="java1-symbol">, </span><span class="java1-number">568</span><span class="java1-symbol">, </span><span class="java1-number">100</span><span class="java1-symbol">);
+     lAuswertung1.setVisible(</span><span class="java1-reservedword">false</span><span class="java1-symbol">);
+     lSiehabenfolgendeFarbenausgewaehlt.setVisible(</span><span class="java1-reservedword">false</span><span class="java1-symbol">);
+     lEswurdenfolgendeFarbengezogen.setVisible(</span><span class="java1-reservedword">false</span><span class="java1-symbol">);
+     bGruen.setVisible(</span><span class="java1-reservedword">false</span><span class="java1-symbol">);
+     bGelb.setVisible(</span><span class="java1-reservedword">false</span><span class="java1-symbol">);
+     bBlau.setVisible(</span><span class="java1-reservedword">false</span><span class="java1-symbol">);
+     bRot.setVisible(</span><span class="java1-reservedword">false</span><span class="java1-symbol">);
+     bWeiss.setVisible(</span><span class="java1-reservedword">false</span><span class="java1-symbol">);
+     bSchwarz.setVisible(</span><span class="java1-reservedword">false</span><span class="java1-symbol">);
+    lSchwarz.setVisible(</span><span class="java1-reservedword">false</span><span class="java1-symbol">);
+    lWeiss.setVisible(</span><span class="java1-reservedword">false</span><span class="java1-symbol">);
+    lRot.setVisible(</span><span class="java1-reservedword">false</span><span class="java1-symbol">); 
+    lBlau.setVisible(</span><span class="java1-reservedword">false</span><span class="java1-symbol">);
+    lGelb.setVisible(</span><span class="java1-reservedword">false</span><span class="java1-symbol">);
+    lGruen.setVisible(</span><span class="java1-reservedword">false</span><span class="java1-symbol">);
+    lDasSpielistvorbei1.setVisible(</span><span class="java1-reservedword">true</span><span class="java1-symbol">);
+    lSiehaben.setText(</span><span class="java1-string">&quot;Sie haben &quot;</span><span class="java1-symbol">+Punktezahl+</span><span class="java1-string">&quot; Punkte erreicht:)&quot;</span><span class="java1-symbol">);
+    lSiehaben.setVisible(</span><span class="java1-reservedword">true</span><span class="java1-symbol">);
+    lPunktezahl.setBounds(</span><span class="java1-number">460</span><span class="java1-symbol">, </span><span class="java1-number">400</span><span class="java1-symbol">, </span><span class="java1-number">80</span><span class="java1-symbol">, </span><span class="java1-number">36</span><span class="java1-symbol">);
+    </span><span class="java1-reservedword">try</span><span class="java1-symbol">{
+
+       Thread.sleep(</span><span class="java1-number">1000</span><span class="java1-symbol">);
+      } </span><span class="java1-reservedword">catch</span><span class="java1-symbol">(InterruptedException ex){
+        </span><span class="java1-comment">//do stuff
+</span><span class="java1-space">        }
+    lUmdasSpielzubeendenklickensie.setVisible(</span><span class="java1-reservedword">true</span><span class="java1-symbol">);
+    bHier.setVisible(</span><span class="java1-reservedword">true</span><span class="java1-symbol">);
+    
+  } </span><span class="java1-comment">// end of bWeiter1_ActionPerformed
+</span><span class="java1-space"> 
+  </span><span class="java1-reservedword">public</span><span class="java1-space"> </span><span class="java1-reservedword">void</span><span class="java1-space"> bHier_ActionPerformed(ActionEvent evt) {
+    </span><span class="java1-comment">// TODO hier Quelltext einfügen
+</span><span class="java1-space">    
+    System.exit(</span><span class="java1-number">0</span><span class="java1-symbol">);
+
+  } </span><span class="java1-comment">// end of bHier_ActionPerformed
+
+</span><span class="java1-space">  </span><span class="java1-comment">// Ende Methoden
+</span><span class="java1-symbol">} </span><span class="java1-comment">// end of class Mastermind
+
+</span></span>
+</code></pre>
+</body>
+</html>
