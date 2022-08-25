@@ -196,7 +196,7 @@ public class Mastermind extends JFrame {
     lAuswertung1.setVisible(false);
     cp.add(lAuswertung1);
     lSiehabenfolgendeFarbenausgewaehlt.setBounds(75, 150, 457, 36);
-    lSiehabenfolgendeFarbenausgewaehlt.setText("Sie haben folgende Farben ausgew�hlt:");
+    lSiehabenfolgendeFarbenausgewaehlt.setText("Sie haben folgende Farben ausgewählt:");
     lSiehabenfolgendeFarbenausgewaehlt.setBackground(new Color(0xFFC800));
     lSiehabenfolgendeFarbenausgewaehlt.setOpaque(true);
     lSiehabenfolgendeFarbenausgewaehlt.setFont(new Font("@Malgun Gothic", Font.BOLD, 24));
