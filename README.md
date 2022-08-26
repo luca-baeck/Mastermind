@@ -18,7 +18,7 @@ man versucht, bestimmte Farben richtig vorherzusagen.</p>
 ![Screenshot](/application-preview/gameover.png "Screenshot")
 
 Gameplay Video:
-[Video](/application-preview/gameplay.mp4 "Video")
+[Video](/application-preview/gameplay.ts "Video")
 
 ## Sprachen
 
